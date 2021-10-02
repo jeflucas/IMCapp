@@ -4,8 +4,8 @@ import { Button } from "react-native-paper";
 
 export default class App extends React.Component {
   state = {
-    peso: 300,
-    altura: 1.88,
+    peso: 0,
+    altura: 0,
     imc: 0,
     legenda: "Indeterminado",
   };
@@ -49,8 +49,26 @@ export default class App extends React.Component {
           <Text style={styles.diagnostico}>{this.state.legenda}</Text>
         </View>
         <View>
-          <TextInput style={styles.peso} />
-          <TextInput style={styles.altura} />
+          <TextInput
+            placeholder="Peso"
+            keyboardType="number-pad"
+            style={styles.peso}
+            onChangeText={(valor) => {
+              this.setState({
+                peso: valor.replace(",", "."),
+              });
+            }}
+          />
+          <TextInput
+            placeholder="Altura"
+            keyboardType="number-pad"
+            style={styles.altura}
+            onChangeText={(valor) => {
+              this.setState({
+                altura: valor.replace(",", "."),
+              });
+            }}
+          />
           <Button mode="contained" onPress={this.calcularIMC}>
             Calcular
           </Button>
